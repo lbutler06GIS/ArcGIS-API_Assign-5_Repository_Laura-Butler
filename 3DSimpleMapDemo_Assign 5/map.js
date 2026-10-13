@@ -49,6 +49,8 @@ Main = (function() {
             }
         }
     });
+
+
                 
     const initMap = function(){
                           
@@ -77,8 +79,12 @@ Main = (function() {
                 geometry: point,                            
                 symbol: markerSymbol,                            
                 popupTemplate: {                                
-                    title: key + ": " + value.city + ", " + value.state                            
-                }                  
+                    title: key,                     
+                      
+                content: "<b>Location:</b> " + (value.city || value.park) + "<br><b>State/Region:</b> " +
+                    (value.state || value.province || value.region || value.prefecture) + "<br><b>Country:</b> " +
+                    (value.country)
+                }          
             });
                           
             graphicsLayer.add(pointGraphic);
