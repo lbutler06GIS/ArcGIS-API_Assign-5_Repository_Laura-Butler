@@ -6,7 +6,7 @@ var myStuff = {
     "Place of Birth": {city: "Oceanside", state: "California", "coord": [-117.3795, 33.1959] },
     "Annual Family Vacation": {city: "Buena Vista", state: "Colorado", "coord": [-106.1311, 38.8422] },
     "Where I Grew Up": {city: "Gillette", state: "Wyoming", "coord": [-105.5022, 44.2911] },
-    "A Place I Want to Visit": {city: "Kanazawa", prefecture: "Ishikawa", country: "Japan", "coord": [-116.0500, 51.6000] }
+    "A Place I Want to Visit": {city: "Kanazawa", prefecture: "Ishikawa", country: "Japan", "coord": [136.6562, 36.5613] }
 }
 
 
