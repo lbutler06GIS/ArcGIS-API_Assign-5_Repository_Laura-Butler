@@ -50,13 +50,20 @@ Main = (function() {
         }
     });
 
+    const myPoints = new GraphicsLayer();
+    map.add(myPoints);
 
+view.on("click", function(event) {
+    view.hitTest(event).then(function(response) {
+        const clickedGraphic = response.results.find(function(result) {
+         return result.graphic && result.graphic.layer === myPoints;
+    });
+    console.log(clickedGraphic);
+    });
+});
                 
     const initMap = function(){
-                          
-        const graphicsLayer = new GraphicsLayer();               
-        map.add(graphicsLayer);
-
+      
         for (const [key, value] of Object.entries(myStuff)){                       
             console.log(key, value)
                         
@@ -87,7 +94,7 @@ Main = (function() {
                 }          
             });
                           
-            graphicsLayer.add(pointGraphic);
+            myPoints.add(pointGraphic);
                     
                     
         }
