@@ -1,7 +1,7 @@
 # Assignment 5 - ArcGIS API Practice Creating 3D Map
 
 3D Map created for this assignment can be found at the following link:
-
+https://lbutler06gis.github.io/ArcGIS-API_Assign-5_Repository_Laura-Butler/
 
 ## 1. Project Overview
 
