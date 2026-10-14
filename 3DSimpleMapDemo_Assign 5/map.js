@@ -8,7 +8,7 @@ import GraphicsLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/Graphic
 import ElevationLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/ElevationLayer.js";
 import SceneView from "https://js.arcgis.com/5.1/@arcgis/core/views/SceneView.js";
 import Search from "https://js.arcgis.com/5.1/@arcgis/core/widgets/Search.js";
-
+import { findClusters } from "./cluster.js";
 
 Main = (function() {
     const layer = new ElevationLayer({
@@ -124,6 +124,9 @@ Main = (function() {
     }
                 
     initMap()
+
+    //linking my cluster.js to obj.js.
+    findClusters(myStuff);
                 
     return {};
 
