@@ -65,7 +65,7 @@ Main = (function() {
         index: 2
     });
 
-// moved this piece of code and renamed it myPoints so it could also be used with the zoom function. So, myPoints creates new empty layer on map where stick
+// moved this piece of code and renamed it myPoints so it could also be used with the zoom function. So, myPoints creates new empty layer on map where
 // stick-figure markers are stored.
     const myPoints = new GraphicsLayer();
     map.add(myPoints); //adds each marker to the new graphic layer
