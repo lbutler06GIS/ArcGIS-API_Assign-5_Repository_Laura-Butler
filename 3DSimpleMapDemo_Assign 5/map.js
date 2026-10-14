@@ -8,7 +8,8 @@ import GraphicsLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/Graphic
 import ElevationLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/ElevationLayer.js";
 import SceneView from "https://js.arcgis.com/5.1/@arcgis/core/views/SceneView.js";
 import Search from "https://js.arcgis.com/5.1/@arcgis/core/widgets/Search.js";
-import { findClusters } from "./cluster.js";
+import { setupCluster } from "./cluster.js";
+import * as reactiveUtils from "https://js.arcgis.com/5.1/@arcgis/core/core/reactiveUtils.js";  
 
 Main = (function() {
     const layer = new ElevationLayer({
@@ -106,7 +107,10 @@ Main = (function() {
             
             const pointGraphic = new Graphic({                            
                 geometry: point,                            
-                symbol: markerSymbol,                            
+                symbol: markerSymbol,
+                attributes: {
+                    name: key,
+                },                            
                 popupTemplate: {                                
                     title: key,                     
                       
@@ -125,8 +129,8 @@ Main = (function() {
                 
     initMap()
 
-    //linking my cluster.js to obj.js.
-    findClusters(myStuff);
+    //linking my cluster.js to map
+    setupCluster(view, myPoints, Graphic, myStuff, reactiveUtils);
                 
     return {};
 

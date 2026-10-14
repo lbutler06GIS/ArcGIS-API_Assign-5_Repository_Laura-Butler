@@ -2,43 +2,73 @@
 // 3D maps; I am using W3 schools to piece together coding from tutorials to make this work. More details in readme.md file
 
 // this tells another JavaScript file that.. Hey, I'm here, read me, use me. I think.
-export function findClusters(locations) {
-    const locationList = Object.entries(locations); //will create an array which apparently makes it easier to work with.
-    
-    locationList.forEach(function(location) {
-        console.log(location[0], location[1].coord);
-});
-// code to retrieve coordinates of two different locations independently. 
-const firstLocation = locationList[0][1].coord;
-const secondLocation = locationList[6][1].coord;
+export function setupCluster(view, myPoints, Graphic, myStuff, reactiveUtils) {
+    //Get the coordinates for Sparfish and Gillette.
+    const spearfish = myStuff["Graduate School"].coord;
+    const gillette = myStuff["Where I Grew Up"].coord;
 
-console.log("First location:", firstLocation);
-console.log("Second location:", secondLocation);
+    // Calculate the center between the two Locations
+    const middleLongitude = (spearfish[0] + gillette[0]) / 2;
+    const middleLatitude = (spearfish[1] + gillette[1]) / 2;
 
-// Calculate the difference between the coordinates
+    // Create a cluster marker conatining the number 2.
+    const clusterMarker = new Graphic({
+        geometry: {
+            type: "point",
+            longitude: middleLongitude,
+            latitude: middleLatitude,
+            z: 10000
+        },
 
-const longitudeDifference = Math.abs(firstLocation[0] - secondLocation[0]);
-const latitudeDifference = Math.abs(firstLocation[1] - secondLocation[1]);
+        symbol: {
+            type: "simple-marker",
+            style: "circle",
+            color: "purple",
+            size: 30,
+            outline: {
+                color: "white",
+                width: 2
+            }
+        },
 
-console.log("Longitude difference:", longitudeDifference);
-console.log("Latitude difference:", latitudeDifference);
+        popupTemplate: {
+            title: "2 Locations",
+            content: "Graduate School; Spearfish, SD and Where I Grew Up: Gillette, WY"
+        }
+    });
 
-// if is checking whether a 'condition' is true. Picked less than 2 degrees in both directions. && means AND both conditions must be true
+    // Put the cluster in its own layer.
+    const clusterLayer = new myPoints.constructor();
+    view.map.add(clusterLayer);
+    clusterLayer.add(clusterMarker);
 
-if (longitudeDifference < 2 && latitudeDifference < 2) {
-    console.log("These locations are close enough to cluster.");
+    // Find the two original stick-figure markers.
+    const originalMarkers = myPoints.graphics.toArray().filter(function(graphic) {
+        return graphic.attributes &&
+        (graphic.attributes.name === "Graduate School" ||
+        graphic.attributes.name === "Where I Grew Up");
+        
+    });
+
+    // Switch between the cluster and the original markers.
+    function updateCluster() {
+        if (view.zoom < 6) {
+            clusterLayer.visible = true;
+            originalMarkers.forEach(function(marker) {
+                marker.visible = false;
+            });
+        } else {
+            clusterLayer.visible = false;
+            originalMarkers.forEach(function(marker) {
+                marker.visible = true;
+            });
+        }
+    }
+
+    // Run when the map zoom changes.
+    reactiveUtils.watch(
+        () => view.zoom,
+        updateCluster,
+        { initial: true }
+    );
 }
-    // else tells JavaScript what to do when the conditions are not both true.
-    else {
-    console.log("These locations are too far apart to cluster");
-}
-}
-
-
-
-}
-
-
-
-
-
