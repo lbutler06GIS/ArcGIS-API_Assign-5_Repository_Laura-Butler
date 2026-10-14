@@ -7,7 +7,8 @@ import Graphic from "https://js.arcgis.com/5.1/@arcgis/core/Graphic.js";
 import GraphicsLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/GraphicsLayer.js";
 import ElevationLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/ElevationLayer.js";
 import SceneView from "https://js.arcgis.com/5.1/@arcgis/core/views/SceneView.js";
-import Search from "https://js.arcgis.com/@arcgis/core/widgets/Search.js";
+import Search from "https://js.arcgis.com/5.1/@arcgis/core/widgets/Search.js";
+
 
 Main = (function() {
     const layer = new ElevationLayer({
@@ -51,6 +52,14 @@ Main = (function() {
         }
     });
 
+    //adding code for a 'search' bar
+    const searchWidget = new Search({
+        view: view
+    });
+    view.ui.add(searchWidget, {
+        position: "top-left",
+        index: 2
+    });
 
 // moved this piece of code and renamed it myPoints so it could also be used with the zoom function. So, myPoints creates new empty layer on map where stick
 // stick-figure markers are stored.
