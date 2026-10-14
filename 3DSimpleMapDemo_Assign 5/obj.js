@@ -1,5 +1,5 @@
 var myStuff = {
-    "Graduate School": {city: "Spearfish", state: "South Dakota", contry: "United States", "coord": [-103.8617, 44.4922] },
+    "Graduate School": {city: "Spearfish", state: "South Dakota", country: "United States", "coord": [-103.8617, 44.4922] },
     "Favorite Travel Spot #1": {city: "La Fortuna", region: "Alajuela Province", country: "Costa Rica", "coord": [-84.6453, 10.4709] },
     "Current Residence": {city: "Marysville", state: "Kansas", country: "United States", "coord": [-96.6472, 39.6472] },
     "Favorite Travel Spot #2": {park: "Banff National Park", province: "Alberta", country: "Canada", "coord": [-116.0500, 51.6000] },
