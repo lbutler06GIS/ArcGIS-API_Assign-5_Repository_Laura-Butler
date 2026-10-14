@@ -7,6 +7,7 @@ import Graphic from "https://js.arcgis.com/5.1/@arcgis/core/Graphic.js";
 import GraphicsLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/GraphicsLayer.js";
 import ElevationLayer from "https://js.arcgis.com/5.1/@arcgis/core/layers/ElevationLayer.js";
 import SceneView from "https://js.arcgis.com/5.1/@arcgis/core/views/SceneView.js";
+import Search from "https://js.arcgis.com/@arcgis/core/widgets/Search.js";
 
 Main = (function() {
     const layer = new ElevationLayer({
@@ -18,7 +19,7 @@ Main = (function() {
             layers: [layer]
          },
     });
-    
+    // this is info governing how the map is seen and where it shows up geographically
     const view = new SceneView({
         container: "map",
         viewingMode: "global",
@@ -50,17 +51,29 @@ Main = (function() {
         }
     });
 
-    const myPoints = new GraphicsLayer();
-    map.add(myPoints);
 
-view.on("click", function(event) {
-    view.hitTest(event).then(function(response) {
-        const clickedGraphic = response.results.find(function(result) {
-         return result.graphic && result.graphic.layer === myPoints;
+// moved this piece of code and renamed it myPoints so it could also be used with the zoom function. So, myPoints creates new empty layer on map where stick
+// stick-figure markers are stored.
+    const myPoints = new GraphicsLayer();
+    map.add(myPoints); //adds each marker to the new graphic layer
+
+// this sets up the 'event' which is a click on my stick-figure
+    view.on("click", function(event) {
+        view.hitTest(event).then(function(response) {
+            const clickedGraphic = response.results.find(function(result) {
+                return result.graphic && result.graphic.layer === myPoints; // this checks if a marker in myPoints was clicked. If it was... then next code.
+            });
+    // this is tying in the click event to the locations that were made into stick-figures (markers). This is different than other coding
+    // i've done where you'd have to link it to the obj.js file.
+             if (clickedGraphic) {
+                view.goTo({
+                    target: clickedGraphic.graphic.geometry,
+                        zoom: 10
+
+                 });
+            }
+        });
     });
-    console.log(clickedGraphic);
-    });
-});
                 
     const initMap = function(){
       
