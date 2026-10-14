@@ -24,7 +24,7 @@ export function setupCluster(view, myPoints, Graphic, myStuff, reactiveUtils) {
             type: "simple-marker",
             style: "circle",
             color: "purple",
-            size: 30,
+            size: 15,
             outline: {
                 color: "white",
                 width: 2
@@ -32,8 +32,8 @@ export function setupCluster(view, myPoints, Graphic, myStuff, reactiveUtils) {
         },
 
         popupTemplate: {
-            title: "2 Locations",
-            content: "Graduate School; Spearfish, SD and Where I Grew Up: Gillette, WY"
+            title: "<b>2 Locations:</b>",
+            content: "<b>Location 1:</b> Spearfish, SD <br><b>Location 2:</b> Gillette, WY <br>Use mouse to zoom in and view separated locations."
         }
     });
 

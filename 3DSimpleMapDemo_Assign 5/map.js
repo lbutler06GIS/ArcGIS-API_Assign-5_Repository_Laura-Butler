@@ -43,6 +43,9 @@ Main = (function() {
             dockEnabled: true,
             dockOptions: {
                 breakpoint: false
+            },
+            visibleElements: {
+                actionBar: false
             }
         },
         // enable shadows to be cast from the features
